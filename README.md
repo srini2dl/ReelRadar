@@ -19,7 +19,7 @@ To run the project you need the api key from
 ##ScreenShot
 |Home | Home2 |
 |------|-----|
-|![Home](ScreenShot/Home.png)| |![Home](ScreenShot/Home-2.png)|
+|![Home](ScreenShot/Home.png)| ![Home](ScreenShot/Home-2.png)|
 
 |Movie Detail | Movie Detail Credits |
 |------|-----|

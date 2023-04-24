@@ -19,4 +19,5 @@ To run the project you need the api key from
 ![Home](ScreenShot/Home.png)
 
 |Movie Detail | Movie Detail Credits |
+|------|-----|
 |![Movie Detail](ScreenShot/MovieDetail-credit.png)| ![Movie Detail Credits](ScreenShot/MovieDetail.png) |

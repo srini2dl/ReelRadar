@@ -16,7 +16,10 @@ To run the project you need the api key from
 2. In the project navigator, find the Keys.plist file in the ReelRadar directory.
 3. for the key themovieDBapiKey, and enter your API key as the value.
 
-![Home](ScreenShot/Home.png)
+##ScreenShot
+|Home | Home2 |
+|------|-----|
+|![Home](ScreenShot/Home.png)| |![Home](ScreenShot/Home-2.png)|
 
 |Movie Detail | Movie Detail Credits |
 |------|-----|

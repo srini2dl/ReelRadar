@@ -1,6 +1,4 @@
 # ReelRadar
-SwiftUI App using IMDb API
-
 
 
 ## The app uses the following technologies

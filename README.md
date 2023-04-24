@@ -15,3 +15,8 @@ To run the project you need the api key from
 1. Open your Xcode project.
 2. In the project navigator, find the Keys.plist file in the ReelRadar directory.
 3. for the key themovieDBapiKey, and enter your API key as the value.
+
+![Home](ReelRadar/blob/main/ScreenShot/Home.png)
+|Movie Detail | Movie Detail Credits |
+|![Movie Detail](ReelRadar/blob/main/ScreenShot/MovieDetail-credit.png)| ![Movie Detail Credits](ReelRadar/blob/main/ScreenShot/MovieDetail.png
+) |

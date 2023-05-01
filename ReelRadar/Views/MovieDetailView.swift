@@ -73,9 +73,9 @@ struct MovieDetailView: View {
                      }
                  }
                  .frame(maxWidth: .infinity)
-                 if let casts = credits.cast, selectedTab == .cast {
+                 if selectedTab == .cast {
                      LazyVStack(alignment: .leading)  {
-                         ForEach(casts) { cast in
+                         ForEach(credits.cast) { cast in
                              HStack {
                                  KFImage(cast.image)
                                      .placeholder({
@@ -98,9 +98,9 @@ struct MovieDetailView: View {
                      }
                  }
                  
-                 if let crew = credits.crew, selectedTab == .crew {
+                 if selectedTab == .crew {
                      LazyVStack(alignment: .leading)  {
-                         ForEach(crew) { cast in
+                         ForEach(credits.crew) { cast in
                              HStack {
                                  KFImage(cast.image)
                                      .placeholder({

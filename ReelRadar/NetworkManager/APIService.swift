@@ -43,7 +43,6 @@ final class APIService {
             ]
         )
         url.append(queryItems: queryItems)
-        print(url.absoluteString)
         let (data, _) = try await session.data(for: URLRequest(url: url))
         let decoder = JSONDecoder()
         let value = try decoder.decode(T.self, from: data)

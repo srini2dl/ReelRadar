@@ -1,8 +1,1 @@
-name: Create release
 
-on:
-  workflow_dispatch:
-    inputs:
-      release_notes:
-        description: 'Release notes'
-        required: true

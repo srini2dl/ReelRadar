@@ -20,8 +20,5 @@ platform :ios do
   lane :beta do
     # increment_build_number(xcodeproj: "ReelRadar.xcodeproj")
     build_app(scheme: "ReelRadar")
-    upload_to_testflight(
-      skip_waiting_for_build_processing: true
-    )
   end
 end

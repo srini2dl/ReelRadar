@@ -36,18 +36,7 @@ jobs:
 
       - name: Create build
         if: steps.setup.outputs.cache-hit != 'true'
-        run: bundle exec fastlane beta
+        run: bundle exec fastlane build
       
       - name: Create release
-        id: create_release
-        uses: actions/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: v1.0.0
-        
-        
-        
-        
-        
+        run: bundle exec fastlane release

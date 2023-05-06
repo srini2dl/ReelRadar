@@ -34,7 +34,7 @@ platform :ios do
   lane :release do 
     set_github_release(
       repository_name: "srini2dl/ReelRadar",
-      api_token: ENV["PERSONAL_ACCESS_TOKEN"],
+      api_token: ENV["GITHUB_TOKEN"],
       name: current_version,
       tag_name: "v" + current_version,
       description: (File.read("changelog") rescue "No changelog provided"),

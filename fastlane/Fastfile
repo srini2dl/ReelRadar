@@ -17,8 +17,29 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
-  lane :beta do
+
+  def current_version
+    get_version_number(target: "ReelRadar")
+  end
+  
+  def ipa_build_number
+    get_ipa_info_plist_value(ipa: 'ReelRadar.ipa', key: 'CFBundleVersion')
+  end
+  
+  lane :build do
     # increment_build_number(xcodeproj: "ReelRadar.xcodeproj")
     build_app(scheme: "ReelRadar")
+  end
+
+  lane :release do 
+    set_github_release(
+      repository_name: "srini2dl/ReelRadar",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: current_version,
+      tag_name: "v" + current_version,
+      description: (File.read("changelog") rescue "No changelog provided"),
+      commitish: "main",
+      upload_assets: ["ReelRadar.ipa"]
+      )
   end
 end

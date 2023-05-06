@@ -41,7 +41,7 @@ jobs:
       - name: Create Tag
         if: github.ref == 'refs/heads/main'
         run: |
-          git push --tags https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} -f
+          git push --tags https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} -f -u srini2dl:${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Create Release
         if: github.ref == 'refs/heads/main'

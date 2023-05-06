@@ -41,10 +41,7 @@ jobs:
       - name: Create Tag
         if: github.ref == 'refs/heads/main'
         run: |
-          git config --local user.email "srini2dl@github.com"
-          git config --local user.name "srini2dl"
-          git tag -a v${{ github.run_number }} -m "Version v${{ github.run_number }}"
-          git push origin v${{ github.run_number }}
+          git push --tags https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} -f
 
       - name: Create Release
         if: github.ref == 'refs/heads/main'
@@ -57,4 +54,4 @@ jobs:
           body: |
             Release notes go here
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

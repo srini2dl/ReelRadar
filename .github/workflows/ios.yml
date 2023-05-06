@@ -37,3 +37,6 @@ jobs:
       - name: Upload to test flight
         if: steps.setup.outputs.cache-hit != 'true'
         run: bundle exec fastlane beta
+        env:
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}

@@ -37,6 +37,24 @@ jobs:
       - name: Upload to test flight
         if: steps.setup.outputs.cache-hit != 'true'
         run: bundle exec fastlane beta
+      
+      - name: Create Tag
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "srini2dl@github.com"
+          git config --local user.name "srini2dl"
+          git tag -a v${{ github.run_number }} -m "Version v${{ github.run_number }}"
+          git push origin v${{ github.run_number }}
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            path/to/your/binary
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: |
+            Release notes go here
         env:
-          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

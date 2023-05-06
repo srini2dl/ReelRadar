@@ -6,10 +6,10 @@ struct HomeData {
     let commingSoonMovies: [Movie]
 }
 class HomeViewModel: ObservableObject {
-    @Published var selectedTab: HomeTabs? = .comingSoon
     @Published var tabs: [HomeTabs] = [.boxOffice, .comingSoon]
     @Published var homeData: HomeData?
-    
+    @Published var showingAlert = false
+    var erroMessage: String = ""
     
     @MainActor
     func loadData() async {
@@ -24,8 +24,16 @@ class HomeViewModel: ObservableObject {
                 commingSoonMovies: commingSoonMoviesResponse.results
             )
         } catch {
-            //TODO: Show an alert
-            print(error)
+            handleError(error: error)
         }
+    }
+    
+    func handleError(error: Error) {
+        if let error = error as? NetworkError {
+            erroMessage = error.message
+        } else {
+            erroMessage = error.localizedDescription
+        }
+        showingAlert = true
     }
 }

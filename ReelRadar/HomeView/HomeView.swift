@@ -72,6 +72,20 @@ struct HomeView: View {
                     await viewModel.loadData()
                 }
             }
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(
+                    title: Text(viewModel.erroMessage),
+                    primaryButton: .default(
+                        Text("Retry"),
+                        action: {
+                            Task {
+                                await viewModel.loadData()
+                            }
+                        }
+                    ),
+                    secondaryButton: .cancel()
+                )
+            }
         }.tint(.primary)
     }
 }

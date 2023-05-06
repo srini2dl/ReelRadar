@@ -34,7 +34,7 @@ final class APIService {
         guard var url = baseURL?.appendingPathComponent(path),
               let apiKey = apiKey
         else {
-            throw NSError(domain: "Invalid URL", code: 404)
+            throw NetworkError.invalidUrl
         }
         url.append(
             queryItems: [
@@ -43,10 +43,22 @@ final class APIService {
             ]
         )
         url.append(queryItems: queryItems)
-        let (data, _) = try await session.data(for: URLRequest(url: url))
-        let decoder = JSONDecoder()
-        let value = try decoder.decode(T.self, from: data)
-        return value
+        let (data, response) = try await session.data(for: URLRequest(url: url))
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
+        }
+
+        guard 200...299 ~= httpResponse.statusCode else {
+            throw NetworkError.invalidStatusCode(httpResponse.statusCode)
+        }
+
+        do {
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            return decodedData
+        } catch {
+            throw NetworkError.decodingFailed
+        }
     }
     
     var apiKey: String? {
@@ -61,5 +73,25 @@ final class APIService {
             }
         }
         return nil
+    }
+}
+
+enum NetworkError: Error {
+    case invalidUrl
+    case invalidResponse
+    case invalidStatusCode(Int)
+    case decodingFailed
+    
+    var message: String {
+        switch self {
+        case .invalidUrl:
+            return "Invalid url"
+        case .invalidResponse:
+            return "Invalid response"
+        case .invalidStatusCode(let int):
+            return "Something failed \(int)"
+        case .decodingFailed:
+            return "Unable to decode the response"
+        }
     }
 }

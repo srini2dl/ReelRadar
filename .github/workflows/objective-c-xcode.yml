@@ -1,0 +1,30 @@
+name: iOS starter workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: Create Tag
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git push --tags https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} -f -u srini2dl:${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            path/to/your/binary
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: |
+            Release notes go here
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

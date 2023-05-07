@@ -40,4 +40,4 @@ jobs:
         run: bundle exec fastlane build
       
       - name: Create release
-        run: bundle exec fastlane release
+        run: env GITHUB_TOKEN=${{ github.token }} bundle exec fastlane release
